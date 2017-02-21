@@ -5,17 +5,22 @@ namespace admin\assets;
 use yii\web\AssetBundle;
 
 /**
- * Main admin application asset bundle.
+ * Admin application asset bundle.
  */
-class AppAsset extends AssetBundle
+class AdminApplicationAsset extends AssetBundle
 {
+    /** {@inheritDoc} */
     public $basePath = '@webroot';
+
+    /** {@inheritDoc} */
     public $baseUrl = '@web';
+
+    /** {@inheritDoc} */
     public $css = [
         'css/site.css',
     ];
-    public $js = [
-    ];
+
+    /** {@inheritDoc} */
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

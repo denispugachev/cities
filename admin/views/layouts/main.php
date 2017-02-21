@@ -3,14 +3,13 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use admin\assets\AppAsset;
-use yii\helpers\Html;
+use admin\assets\AdminApplicationAsset;
+use common\widgets\Alert;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;
+use yii\helpers\Html;
 
-AppAsset::register($this);
+AdminApplicationAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -28,8 +27,6 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -57,19 +54,26 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <?= Alert::widget() ?>
+
+        <?php if (!Yii::$app->user->isGuest) { ?>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Your API access token</h3>
+                </div>
+                <div class="panel-body">
+                    <?= Yii::$app->user->getIdentity()->access_token; ?>
+                </div>
+            </div>
+        <?php } ?>
+
         <?= $content ?>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="text-center"><strong>Cities sample RESTful application</strong></p>
     </div>
 </footer>
 
