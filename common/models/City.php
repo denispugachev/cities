@@ -35,14 +35,15 @@ class City extends ActiveRecord
      */
     public function validateUniqueNameInRegion($attribute, $params, $validator)
     {
-        if (
-            $this->region_id === null ||
-            City::findOne(['region_id' => $this->region_id, 'name' => $this->$attribute]) !== null
-        ) {
-            $this->addError(
-                $attribute,
-                sprintf('City with name "%s" already exists in region', $this->$attribute)
-            );
+        if ($this->region_id !== null) {
+            $city = City::findOne(['region_id' => $this->region_id, 'name' => $this->$attribute]);
+
+            if ($city !== null && ($city->id != $this->id)) {
+                $this->addError(
+                    $attribute,
+                    sprintf('City with name "%s" already exists in region', $this->$attribute)
+                );
+            }
         }
     }
 
