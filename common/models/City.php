@@ -51,6 +51,7 @@ class City extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            'region_id' => 'Region',
             'region.name' => 'Region',
             'region.country.name' => 'Country',
         ];

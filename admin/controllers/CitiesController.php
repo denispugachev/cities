@@ -3,9 +3,11 @@
 namespace admin\controllers;
 
 use common\models\City;
+use common\models\Region;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -63,6 +65,7 @@ class CitiesController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'regionsList' => $this->getRegionsListForDropdown(),
             ]);
         }
     }
@@ -83,6 +86,7 @@ class CitiesController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'regionsList' => $this->getRegionsListForDropdown(),
             ]);
         }
     }
@@ -116,5 +120,18 @@ class CitiesController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * Returns array of Regions for dropdown.
+     *
+     * @return array
+     */
+    protected function getRegionsListForDropdown() {
+        $regions = Region::find()->orderBy('id')->with('country')->asArray()->all();
+
+        return ArrayHelper::map($regions, 'id', function($model) {
+            return $model['country']['name'] . ', ' . $model['name'];
+        });
     }
 }

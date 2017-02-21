@@ -3,8 +3,9 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model common\models\City */
+/* @var yii\web\View $this */
+/* @var common\models\City $model */
+/* @var array $regionsList */
 
 $this->title = 'Create City';
 $this->params['breadcrumbs'][] = ['label' => 'Cities', 'url' => ['index']];
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'regionsList' => $regionsList,
     ]) ?>
 
 </div>

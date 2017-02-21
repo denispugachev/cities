@@ -3,16 +3,17 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\City */
-/* @var $form yii\widgets\ActiveForm */
+/* @var yii\web\View $this */
+/* @var common\models\City $model */
+/* @var array $regionsList */
+/* @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="city-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'region_id')->textInput() ?>
+    <?= $form->field($model, 'region_id')->dropDownList($regionsList); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
