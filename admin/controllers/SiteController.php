@@ -8,13 +8,11 @@ use yii\filters\AccessControl;
 use admin\models\LoginForm;
 
 /**
- * Site controller
+ * Site controller.
  */
 class SiteController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
+    /** {@inheritDoc} */
     public function behaviors()
     {
         return [
@@ -41,9 +39,7 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** {@inheritDoc} */
     public function actions()
     {
         return [
@@ -54,13 +50,13 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Index action.
      *
      * @return string
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['cities/index']);
     }
 
     /**

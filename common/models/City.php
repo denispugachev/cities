@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\validators\Validator;
 
@@ -11,6 +12,7 @@ use yii\validators\Validator;
  * @property integer $id
  * @property string $name
  * @property integer $region_id
+ * @property Region $region
  */
 class City extends ActiveRecord
 {
@@ -42,5 +44,37 @@ class City extends ActiveRecord
                 sprintf('City with name "%s" already exists in region', $this->$attribute)
             );
         }
+    }
+
+    /** {@inheritDoc} */
+    public function attributeLabels()
+    {
+        return [
+            'region.name' => 'Region',
+            'region.country.name' => 'Country',
+        ];
+    }
+
+    /**
+     * Returns Region relation.
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRegion() {
+        return $this->hasOne(Region::class, ['id' => 'region_id']);
+    }
+
+    /**
+     * Returns ActiveDataProvider for model.
+     *
+     * @return ActiveDataProvider
+     */
+    public static function getActiveDataProvider()
+    {
+        return new ActiveDataProvider([
+            'query' => City::find()->orderBy('id'),
+            'pagination' => false,
+            'sort' => false,
+        ]);
     }
 }
