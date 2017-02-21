@@ -1,11 +1,6 @@
 require 'yaml'
 require 'fileutils'
 
-domains = {
-  frontend: 'y2aa-frontend.dev',
-  backend:  'y2aa-backend.dev'
-}
-
 config = {
   local: './vagrant/config/vagrant-local.yml',
   example: './vagrant/config/vagrant-local.example.yml'
@@ -60,13 +55,10 @@ Vagrant.configure(2) do |config|
   config.hostmanager.manage_host        = true
   config.hostmanager.ignore_private_ip  = false
   config.hostmanager.include_offline    = true
-  config.hostmanager.aliases            = domains.values
+  config.hostmanager.aliases            = 'cities.dev'
 
   # provisioners
   config.vm.provision 'shell', path: './vagrant/provision/once-as-root.sh', args: [options['timezone']]
   config.vm.provision 'shell', path: './vagrant/provision/once-as-vagrant.sh', args: [options['github_token']], privileged: false
   config.vm.provision 'shell', path: './vagrant/provision/always-as-root.sh', run: 'always'
-
-  # post-install message (vagrant console)
-  config.vm.post_up_message = "Frontend URL: http://#{domains[:frontend]}\nBackend URL: http://#{domains[:backend]}"
 end
