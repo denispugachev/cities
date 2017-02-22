@@ -10,7 +10,6 @@ return [
     'id' => 'admin',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'admin\controllers',
-    'bootstrap' => ['log'],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-admin',
@@ -18,15 +17,6 @@ return [
         ],
         'user' => [
             'identityClass' => \common\models\User::class,
-        ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

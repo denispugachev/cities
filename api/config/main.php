@@ -11,7 +11,6 @@ $params = array_merge(
 return [
     'id' => 'api',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'api\controllers',
     'modules' => [
         'v1' => [
@@ -32,15 +31,6 @@ return [
             'identityClass' => \common\models\User::class,
             'enableSession' => false,
             'loginUrl' => null,
-        ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,

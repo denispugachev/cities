@@ -7,19 +7,8 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-console',
+    'id' => 'console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'console\commands',
-    'components' => [
-        'log' => [
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-    ],
     'params' => $params,
 ];
