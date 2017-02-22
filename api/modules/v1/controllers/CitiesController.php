@@ -1,6 +1,6 @@
 <?php
 
-namespace api\controllers;
+namespace api\modules\v1\controllers;
 
 
 use common\models\City;

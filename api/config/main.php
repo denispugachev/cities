@@ -13,6 +13,11 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'api\controllers',
+    'modules' => [
+        'v1' => [
+            'class' => \api\modules\v1\Module::class,
+        ],
+    ],
     'components' => [
         'request' => [
             'baseUrl' => '/api',
@@ -44,7 +49,7 @@ return [
             'rules' => [
                 [
                     'class' => \yii\rest\UrlRule::class,
-                    'controller' => 'cities',
+                    'controller' => 'v1/cities',
                 ],
             ],
         ],
