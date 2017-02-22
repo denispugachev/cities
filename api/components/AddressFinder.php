@@ -3,6 +3,7 @@
 namespace api\components;
 
 use GuzzleHttp\Client;
+use Yii;
 use yii\base\Component;
 use yii\base\Exception;
 
@@ -22,7 +23,10 @@ class AddressFinder extends Component
      */
     public function find($address, $lat, $lng, $distance)
     {
-        $coordinates = $this->getAddressCoordinates($address);
+        $coordinates = Yii::$app->cache->getOrSet([__FUNCTION__, $address], function($cache) use ($address) {
+            return $this->getAddressCoordinates($address);
+        }, 3600);
+
         return $this->distance($lat, $lng, $coordinates[1], $coordinates[0]) <= $distance;
     }
 
