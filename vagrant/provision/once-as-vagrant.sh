@@ -33,6 +33,9 @@ info "Init project"
 info "Apply migrations"
 ./yii migrate <<< "yes"
 
+info "Create content data"
+./yii create-content
+
 info "Create bash-alias 'app' for vagrant user"
 echo 'alias app="cd /app"' | tee /home/vagrant/.bash_aliases
 
