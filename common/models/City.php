@@ -80,7 +80,7 @@ class City extends ActiveRecord
     public static function getActiveDataProvider()
     {
         return new ActiveDataProvider([
-            'query' => City::find()->orderBy('id'),
+            'query' => City::find()->with('region', 'region.country')->orderBy('city.id'),
             'pagination' => false,
             'sort' => false,
         ]);
