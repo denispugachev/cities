@@ -4,10 +4,8 @@ namespace api\modules\v1\controllers;
 
 use api\models\AddressSearchRequest;
 use Yii;
-use yii\filters\auth\QueryParamAuth;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
-use yii\web\Response;
 use yii\web\ServerErrorHttpException;
 
 /**
@@ -15,24 +13,7 @@ use yii\web\ServerErrorHttpException;
  */
 class AddressController extends Controller
 {
-    /**
-     * Override method for changing ContentNegotiator and Authenticator configs.
-     *
-     * {@inheritDoc}
-     */
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['contentNegotiator']['formats'] = [
-            'application/json' => Response::FORMAT_JSON,
-        ];
-
-        $behaviors['authenticator'] = [
-            'class' => QueryParamAuth::className(),
-        ];
-
-        return $behaviors;
-    }
+    use RestControllerBehaviorsTrait;
 
     /**
      * Main action.
