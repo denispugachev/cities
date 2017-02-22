@@ -51,8 +51,10 @@ return [
                     'class' => \yii\rest\UrlRule::class,
                     'controller' => 'v1/cities',
                 ],
+                'GET v1/address' => 'v1/address/index',
             ],
         ],
+        'addressFinder' => \api\components\AddressFinder::class,
     ],
     'params' => $params,
 ];
