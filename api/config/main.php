@@ -1,4 +1,6 @@
 <?php
+use yii\web\Response;
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -7,22 +9,24 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-api',
+    'id' => 'api',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'api\controllers',
     'components' => [
         'request' => [
-            'csrfParam' => '_csrf-api',
+            'baseUrl' => '/api',
+            'parsers' => [
+                'application/json' => \yii\web\JsonParser::class,
+            ]
+        ],
+        'response' => [
+            'format' => Response::FORMAT_JSON,
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
-        ],
-        'session' => [
-            // this is the name of the session cookie used for login on the api
-            'name' => 'advanced-api',
+            'identityClass' => \common\models\User::class,
+            'enableSession' => false,
+            'loginUrl' => null,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -33,17 +37,17 @@ return [
                 ],
             ],
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => \yii\rest\UrlRule::class,
+                    'controller' => 'cities',
+                ],
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

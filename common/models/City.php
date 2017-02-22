@@ -17,6 +17,12 @@ use yii\validators\Validator;
 class City extends ActiveRecord
 {
     /** {@inheritDoc} */
+    public static function tableName()
+    {
+        return 'city';
+    }
+
+    /** {@inheritDoc} */
     public function rules()
     {
         return [
