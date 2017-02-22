@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Migration creates tables: 'user', 'country', 'region', 'city'.
  */
-class m130524_201442_init extends Migration
+class m170222_130014_init extends Migration
 {
     /** {@inheritDoc} */
     public function up()
