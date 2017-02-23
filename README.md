@@ -67,8 +67,8 @@ Required input GET parameters
 |--------------|--------|--------------------------------------|
 | access-token | string | Your access token                    |
 | address      | string | Address to be searched with Geocoder |
-| latitude     | float  | Latitude of center point             |
-| longitude    | float  | Longitude of center point            |
+| lat          | float  | Latitude of center point             |
+| lng          | float  | Longitude of center point            |
 | distance     | float  | Distance                             |
 
 Response example
